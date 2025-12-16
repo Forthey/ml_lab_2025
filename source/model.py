@@ -112,7 +112,7 @@ class Model:
 
         pipeline = self._build_pipeline()
 
-        param_grid = {
+        param_dist = {
             "model__n_estimators": [400, 800, 1200],
             "model__max_depth": [None, 10, 30],
             "model__min_samples_split": [2, 5, 10],
@@ -122,7 +122,7 @@ class Model:
 
         grid = RandomizedSearchCV(
             pipeline,
-            param_grid=param_grid,
+            param_distributions=param_dist,
             n_iter=20,
             cv=3,
             scoring="roc_auc",
