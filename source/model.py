@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, roc_auc_score
-from sklearn.model_selection import GridSearchCV, train_test_split
+from sklearn.model_selection import RandomizedSearchCV, train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 
@@ -120,9 +120,10 @@ class Model:
             "model__max_features": ["sqrt", "log2"],
         }
 
-        grid = GridSearchCV(
+        grid = RandomizedSearchCV(
             pipeline,
             param_grid=param_grid,
+            n_iter=20,
             cv=3,
             scoring="roc_auc",
             n_jobs=-1,
